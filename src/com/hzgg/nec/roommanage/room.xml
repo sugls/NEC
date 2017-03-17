@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+	<package name="roommanage" extends="necbase" namespace="/">
+	
+		 
+		<action name="main">
+			<result type="tiles">main</result>
+		</action>
+	
+		<action name="addRoom" class="com.hzgg.nec.roommanage.action.RoomAction" method="roomAdd">
+			<result type="tiles" name="req">roomAdd</result>
+			<result type="tiles" name="success">roomAdd</result>
+			<result type="tiles" name="error">roomAdd</result>
+		</action>
+		
+		<action name="RMShowRooms" class="com.hzgg.nec.roommanage.action.RoomAction" method="roomsShowStatus">
+			<result type="tiles" name="req">RMShowRooms</result>
+			<result type="tiles" name="success">RMShowRooms</result>
+		</action>
+		
+		
+		<!-- 显示所有空房 -->
+		<action name="showEmptyRooms" class="com.hzgg.nec.roommanage.action.RoomAction" method="showEmptyRooms">
+			<result type="tiles" name="success">roomsShow</result>
+		</action>
+		
+		<action name="modifyRoom" class="com.hzgg.nec.roommanage.action.RoomAction" method="roomModify">
+			<result type="tiles" name="req">roomModify</result>
+			<result type="tiles" name="success">roomModify</result>
+			<result type="tiles" name="error">roomModify</result>
+		</action>
+		
+		<action name="deleteRoom" class="com.hzgg.nec.roommanage.action.RoomAction" method="roomDelete">
+			<result name="success" type="redirectAction">
+				<param name="actionName">RMShowRooms</param>
+			</result>
+		</action>
+		
+		<action name="netManage" class="com.hzgg.nec.roommanage.action.RoomAction" method="checkRoomId">
+			<result type="tiles">roomsManage</result>
+		</action>
+		
+		<action name="checkRoomId" class="com.hzgg.nec.roommanage.action.RoomAction" method="checkRoomId">
+
+        	<result type="json">  
+                <param name="root">ajaxField</param>  
+            </result>  
+      	</action>
+      	
+      	
+      	<action name="getEmptyRoomById" class="com.hzgg.nec.roommanage.action.RoomAction" method="getEmptyRoomById">
+        	<result type="json">  
+                <param name="root">ajaxField</param>  
+            </result>  
+      	</action>
+	
+		<!--获取所有入住信息 -->
+		<action name="getCheckins" class="com.hzgg.nec.roommanage.action.NetworkAction" method="getCheckins">
+			<result type="tiles">roomsManage</result>
+		</action>
+		
+		<action name="netOn" class="com.hzgg.nec.roommanage.action.NetworkAction" method="netOn">
+        	<result type="json">  
+                <param name="root">ajaxField</param>  
+            </result>  
+      	</action>
+		
+		
+		
+		
+		<!-- 
+		<action name="RMShow" class="com.hzgg.nec.roommanage.action.RoomAction" method="roomsShow">
+			<result type="tiles">showRoomStatus</result>
+		</action>
+		 -->
+	</package>
+	
+	
+</struts>

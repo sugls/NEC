@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzgg.nec.roommanage.po.Customer">
+
+	<!-- 登记客户信息 -->
+	<insert id="insertcustomer" parameterType="Customer">
+		INSERT INTO customer(customerid, customername, idcard, sex, phone, address, ischeckin)
+		VALUES (customerid_seq.nextval,#{customername},#{idcard},#{sex},#{phone},#{address},'0')
+	</insert>
+	
+	<!-- 所有客户信息列表 -->
+	<select id="showallcustomers" resultType="Customer">
+		SELECT customerid,customername,idcard,decode(sex,'1','男','0','女') sex,phone,address
+		FROM customer
+		ORDER BY customerid
+	</select>
+	
+	<!-- 根据客户编号查询客户信息 -->
+	<select id="selectcustomerbyid" parameterType="String" resultType="Customer">
+		SELECT customerid,customername,idcard,sex,phone,address
+		FROM customer
+		WHERE customerid=#{customerid}
+	</select>
+	
+	<!-- 修改客户信息 -->
+	<update id="modifycustomer" parameterType="Customer">
+		UPDATE customer SET customername=#{customername},idcard=#{idcard},sex=#{sex},phone=#{phone},address=#{address}
+		WHERE customerid=#{customerid}
+	</update>
+	
+	<!-- 获取客户信息总数 -->
+	<select id="customercount" resultType="int">
+		SELECT COUNT(customerid) FROM customer
+	</select>
+	
+	<!-- 删除客户信息 -->
+	<delete id="deletecustomerbyid" parameterType="String">
+		DELETE FROM customer WHERE customerid=#{customerid}
+	</delete>
+	
+	<!-- 根据条件查询客户信息 -->
+	<select id="selectcustomerbycondition" parameterType="Customer" resultType="Customer">
+		SELECT customerid,customername,idcard,decode(sex,'1','男','0','女') sex,phone,address
+		FROM customer
+		<if test="customerid != null || customername != null || idcard != null">
+			<where>
+				<if test="customerid != null">
+					customerid LIKE '%'||#{customerid}||'%'
+				</if>
+				<if test="customername != null">
+					customername LIKE '%'||#{customername}||'%'
+				</if>
+				<if test="idcard != null">
+					idcard LIKE '%'||#{idcard}||'%'
+				</if>
+			</where>
+		</if>
+	</select>
+	
+	<!-- 查询未入住的客户信息 -->
+	<select id="selectcustomerbyischeckin" resultType="Customer">
+		SELECT customerid,customername,phone,idcard
+		FROM customer
+		WHERE ischeckin = '0'
+	</select>
+	
+	<!-- 查询身份证号是否存在 -->
+	<select id="ifhasidcard" resultType="String" parameterType="String">
+		SELECT idcard FROM customer WHERE idcard = #{idcard}
+	</select>
+	
+	<!-- 查询身份是否存在 -->
+	<select id="ifhasname" resultType="String" parameterType="String">
+		SELECT customername FROM customer WHERE idcard = #{idcard}
+	</select>
+	
+	<select id="ifhasid" resultType="String" parameterType="String">
+		SELECT customerid FROM customer WHERE idcard = #{idcard}
+	</select>
+	
+</mapper>

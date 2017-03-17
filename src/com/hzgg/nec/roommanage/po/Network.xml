@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzgg.nec.roommanage.po.Network">
+
+	<update id="netOn" parameterType="java.lang.String">
+		update checkin 
+		set neton = '1'
+		where checkinid = #{checkinid}
+	</update>
+	
+	<!-- 添加网络开通信息 -->
+	<insert id="addNet" parameterType="CheckinQuery">
+		insert into net_work (networkid, checkinid, ondate)
+		values (networkid_seq.nextval, #{checkinid}, sysdate) 
+	</insert>
+</mapper>

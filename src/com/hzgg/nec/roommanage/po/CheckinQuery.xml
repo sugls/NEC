@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzgg.nec.roommanage.po.CheckinQuery">
+
+	<select id="getCheckins" resultType="CheckinQuery" parameterType="CheckinQuery">
+		select checkinid, roomid, customerid, customername, checkindate, pledge, network, neton 
+		from checkinQuery
+		where checkoutdate is null
+		<if test="roomid != '' and roomid != null">
+			and roomid = #{roomid}
+		</if>
+		<if test="customername != '' and customername != null">
+			and customername = #{customername}
+		</if>
+		order by checkindate
+	</select>
+	
+	<!-- 根据编号获取入住视图信息 -->
+	<select id="getCheckiQueryById" parameterType="java.lang.String">
+		select checkinid, roomid, customerid, customername, checkindate, pledge, network, neton 
+		from checkinQuery
+		where checkinid == #{checkinid}
+	</select>
+	
+	<select id="getPagesC" resultType="java.lang.Integer" parameterType="CheckinQuery">
+		select count(checkinid) 
+		from checkinQuery
+		where checkoutdate is null
+		<if test="roomid != '' and roomid != null">
+			and roomid = #{roomid}
+		</if>
+		<if test="customername != '' and customername != null">
+			and customername = #{customername}
+		</if>
+		order by checkindate
+	</select>
+	
+	<!-- 获取未开通网络数 -->
+	<select id="getNotOnNetworks" resultType="java.lang.Integer">
+		select count(checkinid)
+		from checkinQuery 
+		where network = '需要' and neton = '未开通' and checkoutdate is null
+	</select>
+	
+	<!-- 
+	<resultMap type="CheckinQuery" id="CheckinQueryMap">
+		<id column="checkinid" property="checkinid" javaType="java.lang.String"/>
+		<result column="net_work" property="network" javaType="java.lang.String"/>
+	</resultMap>
+	 -->
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzgg.nec.checkoutmanage.po.NetWork">
+
+	<!-- 所有网络管理信息 -->
+	<select id="selectallnetwork" resultType="CoNetWork" parameterType="CoNetWork">
+		SELECT networkid,roomid,customername,to_char(ondate,'yyyy-mm-dd hh24:mi:ss') strondate,to_char(offdate,'yyyy-mm-dd hh24:mi:ss') stroffdate
+		FROM v$networkmessage
+		<if test="customername != null">
+			WHERE customername LIKE '%'||#{customername}||'%'
+		</if>
+	</select>
+	
+	<!-- 根据网络编号查询网络信息 -->
+	<select id="selectnetworkbyid" resultType="CoNetWork">
+		SELECT roomid,customername,ondate,offdate,to_char(ondate,'yyyy-mm-dd hh24:mi:ss') strondate,to_char(offdate,'yyyy-mm-dd hh24:mi:ss') stroffdate
+		FROM v$networkmessage
+		WHERE networkid = #{networkid}
+	</select>
+	
+	<!-- 更改网费信息，结算网费 -->
+	<update id="modifynetwork" parameterType="CoNetWork">
+		UPDATE net_work SET offdate=SYSDATE WHERE networkid=#{networkid}
+	</update>
+	<update id="modifycheckinneton" parameterType="CoNetWork">
+		UPDATE checkin SET neton='0' WHERE roomid=#{roomid}
+	</update>
+	
+	<!-- 网络管理信息总记录数 -->
+	<select id="networkcount" resultType="Integer">
+		SELECT COUNT(networkid)FROM v$networkmessage
+	</select>
+
+</mapper>

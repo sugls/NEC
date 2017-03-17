@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzgg.nec.roommanage.po.RoomQuery">
+	
+	<!-- 获取所有客房信息 -->
+	<select id="getRoomQueries" resultType="RoomQuery">
+		select roomid, typename, locations, remark, status, price
+		from roomquery
+	</select>
+	
+	<!-- 获取所有空客房信息 -->
+	<select id="getRoomEmptyQueries" resultType="RoomQuery">
+		select roomid, typename, locations, remark, status, price
+		from roomquery 
+		where status = '空' order by roomid
+	</select>
+	
+	<!-- 通过客房号获取客房信息 -->
+	<select id="getRoomQueryById" resultType="RoomQuery" parameterType="java.lang.String">
+		select roomid, typename, locations, remark, status, price
+		from roomquery 
+		where roomid = #{roomid}
+	</select>
+	
+	<!-- 根据条件批量查询客房信息 -->
+	<select id="getRoomByIdLocationTypeStatus" resultType="RoomQuery" parameterType="RoomQuery">
+		select roomid, typename, locations, remark, status, price
+		from roomquery where locations like '%'
+		 <if test="roomid != '' and roomid != null">
+			and roomid = #{roomid}
+		</if>
+		<if test="typename != '' and typename != null">
+			and typename like '%'||#{typename}||'%'
+		</if>
+		<if test="locations != '' and locations != null">
+			and locations like '%'||#{locations}||'%'
+		</if>
+		<if test="status != '' and status != null">
+			and status like '%'||#{status}||'%'
+		</if>
+		order by roomid
+	</select>
+	
+	<!-- 查询所有客房时的总页数 -->
+	<select id="getPages" resultType="java.lang.Integer">
+		select count(roomid) from roomquery
+	</select>
+	
+	
+	<!-- 条件查询时的总页数 -->
+	<select id="getPagesCondition" resultType="java.lang.Integer" parameterType="RoomQuery">
+		select count(roomid)
+		from roomquery where locations like '%'
+		<if test="roomid != '' and roomid != null">
+			and roomid = #{roomid}
+		</if>
+		<if test="typename != '' and typename != null">
+			and typename like '%'||#{typename}||'%'
+		</if>
+		<if test="locations != '' and locations != null">
+			and locations like '%'||#{locations}||'%'
+		</if>
+		<if test="status != '' and status != null">
+			and status like '%'||#{status}||'%'
+		</if>
+		order by roomid
+	</select>
+
+</mapper>

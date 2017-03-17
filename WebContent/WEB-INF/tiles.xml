@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+    <definition name="base" template="/WEB-INF/jsp/template.jsp">
+        <put-attribute name="header" value="/WEB-INF/jsp/header.jsp"/>
+        <put-attribute name="menu" value="/WEB-INF/jsp/menu.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp"/>
+    </definition>
+
+	 <definition name="main" template="/WEB-INF/jsp/template.jsp" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/main.jsp"/>
+    </definition>
+
+    <definition name="customerAdd" template="/WEB-INF/jsp/template.jsp" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/customerAdd.jsp"/>
+    </definition>
+    
+    <definition name="customerModify" template="/WEB-INF/jsp/template.jsp" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/customerModify.jsp"/>
+    </definition>
+    
+    <definition name="customerShow" template="/WEB-INF/jsp/template.jsp" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/customerShow.jsp"/>
+    </definition>
+
+	
+    <definition name="roomAdd" template="/WEB-INF/jsp/template.jsp" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/roomAdd.jsp"/>
+    </definition>
+    
+    <definition name="roomModify" template="/WEB-INF/jsp/template.jsp" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/roomModify.jsp"/>
+    </definition>
+    
+    
+    <definition name="roomsShow" template="/WEB-INF/jsp/template.jsp" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/roomsShow.jsp"/>
+    </definition>
+    
+    <definition name="roomsManage" template="/WEB-INF/jsp/template.jsp" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/roomsManage.jsp"/>
+    </definition>
+    
+    <definition name="checkin" template="/WEB-INF/jsp/template.jsp" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/checkin.jsp"/>
+    </definition>
+    
+    
+    
+    <definition name="checkout" template="/WEB-INF/jsp/template.jsp" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/checkout.jsp"/>
+    </definition>
+    
+     <definition name="order" template="/WEB-INF/jsp/template.jsp" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/order.jsp"/>
+    </definition>
+    
+     <definition name="orderShow" template="/WEB-INF/jsp/template.jsp" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/orderShow.jsp"/>
+    </definition>
+    
+    
+    <definition name="orderModify" template="/WEB-INF/jsp/template.jsp" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/orderModify.jsp"/>
+    </definition>
+    
+    
+    <definition name="orderToCheckin" template="/WEB-INF/jsp/template.jsp" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/orderToCheckin.jsp"/>
+    </definition>
+    
+    
+    
+     <definition name="RMShowRooms" template="/WEB-INF/jsp/template.jsp" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/RMShowRooms.jsp"/>
+    </definition>
+    
+    
+    <definition name="userShow" template="/WEB-INF/jsp/template.jsp" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/userShow.jsp"/>
+    </definition>
+    
+    
+    <!--  添加注册页面   -->
+    <definition name="register" template="/WEB-INF/jsp/template.jsp" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/register.jsp"/>
+    </definition>
+    
+    <!-- 添加！！！！！！！！！！！！新界面 -->
+    <definition name="rpShowCustomers" template="/WEB-INF/jsp/template.jsp" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/RPShowCustomer.jsp"/>
+    </definition>
+    
+    
+    <definition name="showRoomStatus" template="/WEB-INF/jsp/template.jsp" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/showRoomStatus.jsp"/>
+    </definition>
+    <definition name="NetworkOff" template="/WEB-INF/jsp/template.jsp" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/NetworkOff.jsp"/>
+    </definition>
+    
+    
+     <definition name="addEmployee" template="/WEB-INF/jsp/template.jsp" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/addEmployee.jsp"/>
+    </definition>
+    
+	
+	<definition name="ADuserModify" template="/WEB-INF/jsp/template.jsp" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/ADupdateUser.jsp"/>
+    </definition>
+    
+    <definition name="userModify" template="/WEB-INF/jsp/template.jsp" extends="base">
+        <put-attribute name="content" value="/WEB-INF/jsp/modifyUser.jsp"/>
+    </definition>
+
+
+</tiles-definitions>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	
+	<package name="necbase" extends="tiles-default,json-default" namespace="/">
+        <interceptors>
+            <interceptor name="instance" class="com.hzgg.nec.interceptor.InstanceInterceptor"/>
+            <interceptor name="logintest" class="com.hzgg.nec.interceptor.LoginInterceptor"/>
+            <interceptor-stack name="necStack">
+                <interceptor-ref name="defaultStack"/>
+                <interceptor-ref name="instance"/>
+                <interceptor-ref name="logintest"/>
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="necStack"/>
+        
+        <global-results>  
+            <!-- 当返回login视图名时，转入/login.jsp页面 -->  
+            <result name="returnlogin">index.jsp</result>  
+        </global-results>
+    </package>
+    
+    <include file="com/hzgg/nec/roommanage/room.xml"/>
+    <include file="com/hzgg/nec/employeemanage/employee.xml"/>
+    <include file="com/hzgg/nec/ordermanage/order.xml"/>
+    <include file="com/hzgg/nec/checkinmanage/checkin.xml"></include>
+	<include file="com/hzgg/nec/checkoutmanage/checkout.xml"></include>
+
+	
+	
+</struts>

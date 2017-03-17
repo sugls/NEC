@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+	<package name="checkoutmanage" extends="necbase" namespace="/">
+		
+		<!-- 所有网络管理信息显示 -->
+		<action name="showallnetwork" class="com.hzgg.nec.checkoutmanage.action.CheckoutAction" method="getAllNetWork">
+			<result type="tiles" name="success">NetworkOff</result>
+		</action>
+		
+		<!-- 结算网费 -->
+		<action name="networkcost" class="com.hzgg.nec.checkoutmanage.action.CheckoutAction" method="closeNetWork">
+			<result name="success" type="tiles">NetworkOff</result>
+		</action>
+
+		<!-- 入住信息显示 -->
+		<action name="checkinmessage" class="com.hzgg.nec.checkoutmanage.action.CheckoutAction" method="selectCheckin">
+			<result name="success" type="tiles">checkout</result>
+		</action>
+		
+		<!-- 账单显示 -->
+		<action name="costmessage" class="com.hzgg.nec.checkoutmanage.action.CheckoutAction" method="showAllCheckinMessage">
+			<result name="success" type="tiles">checkout</result>
+		</action>
+		
+		<action name="exportExcel" class="com.hzgg.nec.checkoutmanage.action.CheckoutAction" method="exportExcel">
+			 <result type="json">  
+                <param name="root">ajaxField</param>  
+            </result>
+		</action>
+		
+	</package>
+	
+</struts>

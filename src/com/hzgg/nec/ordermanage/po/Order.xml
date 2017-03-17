@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzgg.nec.ordermanage.po.Order">
+
+	<!-- 添加订单 -->
+    <insert parameterType="Order" id="addOrder">
+	  insert into orders(orderid, orderdate, roomid, customername)
+      values (to_char(SYSDATE,'yymmddhh24miss')||to_char(ordersid_seq.nextval), sysdate, #{roomid}, #{customername})
+	</insert>
+	
+	<!-- 条件获取订单 -->
+	<select id="getOrders" resultType="Order" parameterType="Order">
+		select orderid, roomid, customername, orderdate
+		from orders 
+		where orderdate is not null
+		<if test="customername != '' and customername != null">
+			and customername = #{customername}
+		</if>
+		<if test="orderdate != '' and orderdate != null">
+			and orderdate = #{orderdate}
+		</if>
+		order by orderdate
+	</select>
+	
+	<!-- 条件获取总页数 -->
+	<select id="getPagesOC" resultType="java.lang.Integer" parameterType="Order">
+		select count(orderid)
+		from orders
+		where orderdate is not null
+		<if test="customername != '' and customername != null">
+			and customername = #{customername}
+		</if>
+		<if test="orderdate != '' and orderdate != null">
+			and orderdate = #{orderdate}
+		</if>
+		order by orderdate
+	</select>
+
+
+	<!-- 根据id获取订单 -->
+	<select id="getOrderById" parameterType="java.lang.String" resultType="Order">
+		select orderid, roomid, customername, orderdate
+		from orders
+		where orderid = #{orderid}
+	</select>
+    
+    <update id="orderModify" parameterType="Order">
+		update orders 
+		set  roomid = #{roomid}, 
+			customername = #{customername}, 
+			orderdate = #{orderdate}
+		where orderid = #{orderid} 
+	</update>
+
+	<delete id="deleteOrder" parameterType="java.lang.String">
+		DELETE FROM orders WHERE orderid = #{orderid}
+	</delete>
+	
+	<delete id="deleteOrderByRoomId" parameterType="Room">
+		DELETE FROM orders WHERE roomid = #{roomid}
+	</delete>
+    
+
+</mapper>

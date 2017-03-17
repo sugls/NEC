@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+	<package name="checkinmanage" extends="necbase" namespace="/">
+	
+		<!-- 各种超链接 -->
+		<action name="addcustomerlink">
+			<result type="tiles">customerAdd</result>
+		</action>
+		<action name="checkinlink">
+			<result type="tiles">checkin</result>
+		</action>
+		
+	
+		<!-- 验证身份证请求 -->
+		<action name="checkidcard" class="com.hzgg.nec.checkinmanage.action.CheckinAction" method="checkIdcard"></action>
+		
+		<!-- 添加客户信息请求 -->
+		<action name="addcustomer" class="com.hzgg.nec.checkinmanage.action.CheckinAction" method="addCustomer">
+			<result name="success" type="tiles">customerAdd</result>
+			<result name="input" type="tiles">customerAdd</result>
+		</action>
+		
+		<!-- 前台人员查看所有客户信息 -->
+		<action name="rpshowcustomers" class="com.hzgg.nec.checkinmanage.action.CheckinAction" method="rpShowCustomers">
+			<result name="success" type="tiles">rpShowCustomers</result>
+		</action>
+		
+		<!-- 前台人员根据客户编号查看客户详细信息 -->
+		<action name="rpshowonecustomer" class="com.hzgg.nec.checkinmanage.action.CheckinAction" method="rpShowOneCustomer">
+			<result name="success" type="tiles">customerModify</result>
+		</action>
+		
+		<!-- 前台人员修改客户详细信息 -->
+		<action name="rpmodifyonecustomer" class="com.hzgg.nec.checkinmanage.action.CheckinAction" method="rpModifyOneCustomer">
+			<result name="success" type="tiles">customerModify</result>
+			<result name="input" type="tiles">customerModify</result>
+		</action>
+		
+		<!-- 前台删除客户信息 -->
+		<action name="rpdeleteonecustomer" class="com.hzgg.nec.checkinmanage.action.CheckinAction" method="rpDeleteOneCustomer">
+			<result name="success" type="chain">rpshowcustomers</result>
+		</action>
+		
+		<!-- 查询所有客户信息请求 -->
+		<action name="allshowcustomers" class="com.hzgg.nec.checkinmanage.action.CheckinAction" method="showCustomers">
+			<result name="success" type="tiles">customerShow</result>
+		</action>
+		
+		<!-- 根据房间类型显示空闲房间请求 -->
+		<action name="showroomsbytype" class="com.hzgg.nec.checkinmanage.action.CheckinAction" method="showRoomByTypeAndStatus">
+			<result name="success" type="tiles">checkin</result>
+		</action>
+		
+		<!-- 查询未入住的客户信息 -->
+		<action name="showcustomerbyischeckin" class="com.hzgg.nec.checkinmanage.action.CheckinAction" method="showCustomerByIscheckin">
+			<result name="success" type="tiles">checkin</result>
+		</action>
+		
+		<!-- 客户入住办理 -->
+		<action name="customercheckin" class="com.hzgg.nec.checkinmanage.action.CheckinAction" method="addCheckin">
+			<result name="success" type="tiles">checkin</result>
+		</action>
+		
+		<!-- 查看房态信息 -->
+		<action name="showroomsstatus" class="com.hzgg.nec.checkinmanage.action.CheckinAction" method="selectRoomsByFloors">
+			<result name="success" type="tiles">showRoomStatus</result>
+		</action>
+	
+	</package>
+	
+</struts>

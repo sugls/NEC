@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+
+	<package name="employeemanage" extends="necbase" namespace="/">
+		
+		<action name="help-manual" class="com.hzgg.nec.employeemanage.action.DownloadAction">
+			<result name="success" type="stream">
+				<param name="contentType">application/pdf</param>
+				<param name="bufferSize">8192</param>
+				<param name="inputName">content</param>
+				<param name="contentDisposoition">attachment;filename=${downloadFileName}</param>
+			</result>
+		</action>
+		
+		<action name="checklogin" class="com.hzgg.nec.employeemanage.action.LoginAction" method="login">
+			<result name="success" type="tiles">main</result>
+			<result name="error">index.jsp</result>
+		</action>
+		<!-- 导航 “首页” 请求 -->
+		<action name="main">
+			<result type="tiles">main</result>
+		</action>
+
+		<action name="logout" class="com.hzgg.nec.employeemanage.action.LoginAction" method="logout">
+			<result name="success">index.jsp</result>
+		</action>
+
+		<action name="register-link">
+            <result type="tiles">register</result>
+		</action>
+
+
+        <action name="checkUser" class="com.hzgg.nec.employeemanage.action.EmployeeAction" method="checkUser">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+
+		<action name="checkUsername" class="com.hzgg.nec.employeemanage.action.EmployeeAction" method="checkUsername">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<action name="register" class="com.hzgg.nec.employeemanage.action.RegisterAction" method="register">
+			<result type="tiles" name="success">register</result>
+		</action>
+		
+		<action name="showUser" class="com.hzgg.nec.employeemanage.action.EmployeeAction" method="showUser">
+			<result type="tiles" name="success">userShow</result>
+		</action>
+		
+		<action name="updateUser" class="com.hzgg.nec.employeemanage.action.EmployeeAction" method="updateUser">
+			<result type="tiles" name="success">userModify</result>
+		</action>
+		
+		<!-- !!!!!!!!!!! -->
+		<action name="adUpdateUser" class="com.hzgg.nec.employeemanage.action.EmployeeAction" method="updateUser">
+			<result type="tiles" name="success">ADuserModify</result>
+		</action>
+		
+		<action name="getNextEmpId" class="com.hzgg.nec.employeemanage.action.EmployeeAction" method="getGenerateEmpId">
+			
+		</action>
+		
+		
+		<action name="addEmployee-link">
+			<result type="tiles">addEmployee</result>
+		</action>
+		
+		<action name="updateEmps" class="com.hzgg.nec.employeemanage.action.EmployeeAction" method="updateEmps">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<action name="deleteEmps" class="com.hzgg.nec.employeemanage.action.EmployeeAction" method="deleteEmps">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<!-- 添加员工 -->
+		<action name="addEmployee" class="com.hzgg.nec.employeemanage.action.EmployeeAction" method="addEmployee">
+			<result name="success" type="tiles">addEmployee</result>
+		</action>
+		
+	</package>
+	
+</struts>

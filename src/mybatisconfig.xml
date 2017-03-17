@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC
+        "-//mybatis.org//DTD Config 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	
+	<!-- 加载资源文件 -->
+	<properties resource="database.properties"></properties>
+	
+	<!-- 设置别名 -->
+	<typeAliases>
+		<typeAlias type="com.hzgg.nec.checkinmanage.po.Checkin" alias="Checkin"/>
+		<typeAlias type="com.hzgg.nec.checkinmanage.po.Customer" alias="Customer"/>
+		<typeAlias type="com.hzgg.nec.employeemanage.po.Employee" alias="Employee"/>
+		<typeAlias type="com.hzgg.nec.employeemanage.po.Userinfo" alias="Userinfo"/>
+		<typeAlias type="com.hzgg.nec.ordermanage.po.Order" alias="Order"/>
+		<typeAlias type="com.hzgg.nec.roommanage.po.Network" alias="Network"/>
+		<typeAlias type="com.hzgg.nec.roommanage.po.Room" alias="Room"/>
+		<typeAlias type="com.hzgg.nec.roommanage.po.RoomQuery" alias="RoomQuery"/>
+		<typeAlias type="com.hzgg.nec.roommanage.po.RoomType" alias="RoomType"/>
+		<typeAlias type="com.hzgg.nec.roommanage.po.CheckinQuery" alias="CheckinQuery"/>
+		<typeAlias type="com.hzgg.nec.checkinmanage.po.RoomMessage" alias="RoomMessage"/>
+		<typeAlias type="com.hzgg.nec.checkoutmanage.po.CoNetWork" alias="CoNetWork"/>
+		<typeAlias type="com.hzgg.nec.checkoutmanage.po.CheckinMessage" alias="CheckinMessage"/>
+	</typeAliases>
+	
+	<!-- 数据库连接池环境 -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="jdbc"></transactionManager>
+			
+			<dataSource type="pooled">
+				<property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+                <property name="poolMaximumActiveConnections" value="80"/>
+                <property name="poolMaximumIdleConnections" value="20"/>
+			</dataSource>
+		</environment>
+	</environments>
+
+	<!-- 映射文件加载 -->
+	<mappers>
+		<mapper resource="com/hzgg/nec/checkinmanage/po/Checkin.xml"></mapper>
+		<mapper resource="com/hzgg/nec/checkinmanage/po/Customer.xml"></mapper>
+		<mapper resource="com/hzgg/nec/employeemanage/po/Userinfo.xml"></mapper>
+		<mapper resource="com/hzgg/nec/employeemanage/po/Employee.xml"></mapper>
+		<mapper resource="com/hzgg/nec/ordermanage/po/Order.xml"></mapper>
+		<mapper resource="com/hzgg/nec/roommanage/po/Room.xml"></mapper>
+		<mapper resource="com/hzgg/nec/roommanage/po/RoomQuery.xml"></mapper>
+		<mapper resource="com/hzgg/nec/roommanage/po/Network.xml"></mapper>
+		<mapper resource="com/hzgg/nec/roommanage/po/RoomType.xml"></mapper>
+		<mapper resource="com/hzgg/nec/roommanage/po/CheckinQuery.xml"></mapper>
+		<mapper resource="com/hzgg/nec/checkinmanage/po/RoomMessage.xml"/>
+		<mapper resource="com/hzgg/nec/checkoutmanage/po/CoNetWork.xml"/>
+		<mapper resource="com/hzgg/nec/checkoutmanage/po/CheckinMessage.xml"/>
+	</mappers>
+</configuration>        

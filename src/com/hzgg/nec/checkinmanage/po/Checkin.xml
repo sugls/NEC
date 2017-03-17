@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzgg.nec.roommanage.po.Checkin">
+
+	<!-- 客户入住信息添加 -->
+	<insert id="insertcheckin" parameterType="Checkin">
+		INSERT INTO checkin(checkinid, roomid, customerid, checkindate, pledge, net_work, neton)
+		VALUES(#{checkinid}, #{roomid}, #{customerid}, SYSDATE, #{pledge}, #{network}, '0')
+	</insert>
+	
+	<!-- 房间状态修改 -->
+	<update id="modifyroomstatus" parameterType="Checkin">
+		UPDATE room SET status='2' WHERE roomid=#{roomid}
+	</update>
+	
+	<!-- 客户登记信息状态修改 -->
+	<update id="modifycustomerischeckin" parameterType="Checkin">
+		UPDATE customer SET ischeckin='1' WHERE customerid=#{customerid}
+	</update>
+
+</mapper>

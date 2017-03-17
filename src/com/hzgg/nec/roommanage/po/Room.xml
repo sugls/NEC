@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzgg.nec.roommanage.po.Room">
+	
+	<!-- 添加客房 -->
+	<insert parameterType="Room" id="addRoom">
+		insert into room(roomid, type_id, locations, remark, status)
+		values(#{roomid}, #{typeid}, #{locations}, #{remark}, #{status})
+	</insert>
+	
+	<!-- 客房信息更新 -->
+	<update id="modifyRoom" parameterType="Room">
+		update room 
+		set type_id = #{typeid}, remark = #{remark}, status = #{status}
+		where roomid = #{roomid}
+	</update>
+	
+	<!-- 客房状态改变 -->
+	<update id="roomEmptyToOrder" parameterType="Room">
+		update room 
+		set status = #{status}
+		where roomid = #{roomid}
+	</update>
+	
+	<!-- 删除客房信息 -->
+	<delete id="deleteRoom" parameterType="Room">
+		delete from room where roomid = #{roomid}
+	</delete>
+	
+	<!-- 批量删除客房 -->
+	<delete id="deleteRoomByList">
+		delete from room where roomid in 
+		<foreach collection="array" item="item" index="index" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+</mapper>

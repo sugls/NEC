@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+<package name="ordermanage" namespace="/" extends="necbase">
+
+	<!-- 跳转至预定界面 -->
+	<action name="gotoOrder" class="com.hzgg.nec.ordermanage.action.OrderAction">
+		<result type="tiles">order</result>
+	</action>
+	
+	<!-- 添加订单 -->
+	<action name="addOrder" method="addOrder" class="com.hzgg.nec.ordermanage.action.OrderAction">
+		<result type="tiles">order</result>
+	</action>
+
+	<!-- 显示所有订单 -->
+	<action name="showOrders" method="showOrders" class="com.hzgg.nec.ordermanage.action.OrderAction">
+		<result type="tiles">orderShow</result>
+	</action>
+	
+	
+	<action name="gotoModifyOrder" method="gotoModifyOrder" class="com.hzgg.nec.ordermanage.action.OrderAction">
+		<result type="tiles">orderModify</result>
+	</action>
+	
+	<!-- 订单更新 -->
+	<action name="orderModify" method="orderModify" class="com.hzgg.nec.ordermanage.action.OrderAction">
+		<result type="tiles">orderModify</result>
+	</action>
+	
+	<!-- roomid检测 -->
+	<action name="checkORoomId" class="com.hzgg.nec.ordermanage.action.OrderAction" method="checkRoomId">
+      	<result type="json">  
+           	<param name="root">ajaxField</param>  
+       	</result>  
+   	</action>
+      	
+   	<action name="deleteOrder" class="com.hzgg.nec.ordermanage.action.OrderAction" method="deleteOrder">
+   		<result name="success" type="redirectAction">
+			<param name="actionName">showOrders</param>
+		</result>
+   	</action>
+	
+	<action name="gotoOrderToCheckin" method="gotoOrderToCheckin" class="com.hzgg.nec.ordermanage.action.OrderAction">
+		<result type="tiles">orderToCheckin</result>
+	</action>
+	
+	
+	<action name="orderToCheckin" method="orderToCheckin" class="com.hzgg.nec.ordermanage.action.OrderAction">
+		<result type="tiles">orderToCheckin</result>
+	</action>
+	
+	<!-- 检测身份证号是否可用 -->
+	<action name="checkIdCard" class="com.hzgg.nec.ordermanage.action.OrderAction" method="checkIdCard">
+        	<result type="json">  
+                <param name="root">ajaxField</param>  
+            </result>  
+      	</action>
+</package>
+	
+</struts>

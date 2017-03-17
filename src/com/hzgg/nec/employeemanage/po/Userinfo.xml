@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzgg.nec.employeemanage.po.Userinfo">
+	
+	
+	<select id="checklogin" resultType="Userinfo" parameterType="Userinfo">
+		SELECT employeeid
+		FROM userinfo NATURAL JOIN employee
+		WHERE userpwd = #{userpwd} AND postname = #{postname}
+		AND username = #{username}
+	</select>
+
+	<select id="selectUserByEmployeeId" resultType="Userinfo" parameterType="int">
+		SELECT username FROM userinfo
+		WHERE employeeid = #{employeeid}
+	</select>
+
+	<select id="isAvailableUsername" resultType="Integer" parameterType="String">
+		SELECT userid FROM userinfo
+		WHERE username = #{username} 
+	</select>
+
+</mapper>

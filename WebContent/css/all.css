@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+		body{
+            padding-top: 80px;
+            background-color: #f5fff5;
+        }
+        .body-wrapper{
+            height: 800px;
+        }
+        .footer{
+            padding-top: 50px;
+            margin:auto;
+            left:0;
+            right:0;
+            bottom:0;
+            width:200px;
+            text-align: center;
+        }
+        .sidebar {
+            background-color: #f5fff5;
+        }
+        .sidebar li.active > a,
+        .sidebar li > a:hover {
+            color: #fff;
+            background-color: #428BCA;
+        }
+        .sidebar .nav-divider {
+            background-color: transparent;
+        }

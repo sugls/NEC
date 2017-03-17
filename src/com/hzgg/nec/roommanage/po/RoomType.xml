@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzgg.nec.roommanage.po.RoomType">
+	
+	<!-- 获取所有类别信息 -->
+	<select id="getRoomTypes" resultMap="RoomTypeMap">
+		select type_id, typename from roomtype
+	</select>
+	
+	<resultMap type="RoomType" id="RoomTypeMap">
+		<id property="typeid" column="type_id" javaType="java.lang.String"/>
+		<result property="typename" column="typename" javaType="java.lang.String"/>
+		<result property="price" column="price" javaType="java.lang.Double"/>
+	</resultMap>
+</mapper>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzgg.nec.employeemanage.po.Employee">
+
+    <select id="getEmployeeById" parameterType="int" resultType="Employee">
+        SELECT employeeid,
+        decode(postname,'AD','管理员','RP','前台接待','RM','房管员','CS','收银员') postname,realname,decode(sex,1,'男',0,'女') sex,phone,
+        to_char(SYSDATE,'hh24:mi:ss yyyy-MM-dd') logindate
+        FROM employee WHERE employeeid = #{employeeid}
+    </select>
+
+    <insert id="addUser" parameterType="Userinfo">
+        INSERT INTO userinfo(userid,username,userpwd,employeeid)
+        VALUES(userid_seq.nextval,#{username},#{userpwd},#{employeeid})
+    </insert>
+
+	<select id="selectEmpUserinfoByEmpId" parameterType="int" resultType="com.hzgg.nec.employeemanage.po.Emps">
+				
+		SELECT userid, username, userpwd,e.employeeid, postname, realname, decode(sex,1,'男',0,'女') sex, phone
+		FROM userinfo u RIGHT OUTER JOIN employee e ON (e.employeeid = u.employeeid)
+		WHERE e.employeeid = #{employeeid}
+	</select>
+	
+	
+	<select id="selectEmployees" resultType="com.hzgg.nec.employeemanage.po.Emps">
+		SELECT employeeid, postname, realname,decode(sex,1,'男',0,'女') sex, phone, userid, username, userpwd  
+		FROM emps ORDER BY employeeid DESC
+	</select>
+	
+	
+	<select id="getGenerateEmpId" resultType="int">
+		SELECT employeeid_seq.nextval FROM dual
+	</select>
+	
+	
+	 <select id="getTotalRecords" resultType="int">
+        SELECT COUNT(employeeid) total FROM emps
+    </select>
+    
+    <delete id="deleteEmp" parameterType="int">
+    	DELETE FROM employee WHERE employeeid = #{employeeid}
+    </delete>
+    
+    <!-- 修改员工信息 -->
+    <update id="updateEmployee" parameterType="com.hzgg.nec.employeemanage.po.Emps">
+    	UPDATE employee
+    	SET postname=#{postname}
+    	<if test="realname != null">
+    		,realname=#{realname}
+    	</if>
+    	,sex=#{sex}
+    	<if test="phone != null">
+    		,phone=#{phone}
+    	</if> 	
+    	WHERE employeeid= #{employeeid}
+    </update>
+    
+    <!-- 修改用户名密码 -->
+    <update id="updateUser" parameterType="com.hzgg.nec.employeemanage.po.Emps">
+    	UPDATE userinfo
+    	SET username = #{username},userpwd = #{userpwd}
+    	WHERE employeeid=#{employeeid}
+    </update>
+    
+    <insert id="addEmployee" parameterType="Employee">
+    	INSERT INTO employee(employeeid, postname, realname, sex, phone)
+		VALUES(#{employeeid},#{postname},#{realname},#{sex},#{phone,jdbcType=VARCHAR})
+    </insert>
+
+</mapper>
